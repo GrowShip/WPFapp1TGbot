@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFapp1TGbot"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="MainWin" Background="LightGray" Visibility="Visible">
@@ -41,24 +42,24 @@
             Добавить продажу
         </Button>
         <Button Name="SendMsg"
-                Grid.Column="2"
+                Grid.Column="1"
                 Grid.Row="3"
                 Margin="200,5,5,5"
                 Background="Black"/>
         <TextBlock Name="MessageBox"
                    Grid.Row="3"
-                   Grid.Column="1" Grid.ColumnSpan="2"
+                   Grid.Column="0" Grid.ColumnSpan="2"
                    Background="White" 
                    Margin="5,5,80,5"
                    FontSize="15"/>
         <TextBlock Name="MediaInfo"
                    Grid.Row="0" Grid.RowSpan="4"
-                   Grid.Column="0"
+                   Grid.Column="2"
                    Margin="5"
                    Background="LightSkyBlue"/>
         <TextBlock Name="ChatInfo"
                    Grid.Row="0" Grid.RowSpan="2"
-                   Grid.Column="1" Grid.ColumnSpan="2"
+                   Grid.Column="0" Grid.ColumnSpan="2"
                    Margin="5"
                    Background="LightSkyBlue"/>
         
