@@ -8,7 +8,7 @@ namespace WPFapp1TGbot
 {
     struct MessageLog
     {
-        public string Time { get; set; }
+        public string Date { get; set; }
 
         public long ID { get; set; }
 
@@ -16,9 +16,9 @@ namespace WPFapp1TGbot
 
         public string FirstName { get; set; }
 
-        public MessageLog(string Time, string Msg, string FirstName, long ID)
+        public MessageLog(string Date, string Msg, string FirstName, long ID)
         {
-            this.Time = Time;
+            this.Date = Date;
             this.Msg = Msg;
             this.FirstName = FirstName;
             this.ID = ID;

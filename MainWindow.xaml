@@ -68,19 +68,19 @@
                 <ListBox Name="logList"
                  Grid.Row="0" Grid.RowSpan="3"
                  Grid.Column="2" Grid.ColumnSpan="2"
-                 Margin="5"
+                 Margin="2"
                  Background="White"
                  Height="272">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="LightCyan" BorderBrush="Black" Margin="2" BorderThickness="1" CornerRadius="10" >
+                        <Border Background="LightCyan" BorderBrush="Black" Margin="0" BorderThickness="0" CornerRadius="10" >
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="15" Color="LightGray" ShadowDepth="5"/>
                             </Border.Effect>
-                            <StackPanel x:Name="stck"  Width="250">
-                                <TextBlock Text="{Binding FirstName}" Margin="0" FontSize="10" FontWeight="Medium"/>
-                                <TextBlock Text="{Binding Msg}" Margin="0" FontSize="15"/>
-                                <TextBlock Text="{Binding Time}" Margin="0"  FontSize="7" TextAlignment="Center"/>
+                            <StackPanel x:Name="stck"  Width="250" Margin="3">
+                                <TextBlock Text="{Binding FirstName}" Margin="0" FontSize="12" TextAlignment="Center" FontWeight="Medium"/>
+                                <TextBlock Text="{Binding Msg}" Margin="0" FontSize="17"/>
+                                <TextBlock Text="{Binding Date}" Margin="0"  FontSize="11" TextAlignment="Center" FontWeight="Medium"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
@@ -93,7 +93,6 @@
                 Grid.Row="3"
                 Margin="5"
                 Background="Wheat"
-                Opacity="0.5"
                 CornerRadius="10">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Color="LightGray" ShadowDepth="5"/>
@@ -108,9 +107,10 @@
                            Grid.Row="3"
                            Grid.Column="2"
                            Text="{Binding SelectedItem.ID, ElementName=logList}"
-                           Margin="10,0,100,0"
+                           Margin="10,5,100,5"
                            TextAlignment="Center"
                            Padding="5,5,100,5"
+                           FontSize="15"
                            Style="{StaticResource MaterialDesignTextBlock}"/>
             </Grid>
         </Border>
