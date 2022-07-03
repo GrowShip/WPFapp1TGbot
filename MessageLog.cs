@@ -10,18 +10,18 @@ namespace WPFapp1TGbot
     {
         public string Time { get; set; }
 
-        public long Id { get; set; }
+        public long ID { get; set; }
 
         public string Msg { get; set; }
 
         public string FirstName { get; set; }
 
-        public MessageLog(string Time, string Msg, string FirstName, long Id)
+        public MessageLog(string Time, string Msg, string FirstName, long ID)
         {
             this.Time = Time;
             this.Msg = Msg;
             this.FirstName = FirstName;
-            this.Id = Id;
+            this.ID = ID;
         }
 
         //public override string ToString()

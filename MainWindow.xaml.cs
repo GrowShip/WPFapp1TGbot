@@ -27,24 +27,19 @@ namespace WPFapp1TGbot
     /// </summary>
     public partial class MainWindow : Window
     {
-        TGmsgClient botClient;
+        TGmsgClient bot;
         public MainWindow()
         {
             InitializeComponent();
 
-            botClient = new TGmsgClient(this);
+            bot = new TGmsgClient(this);
 
-            logList.ItemsSource = ;
+            logList.ItemsSource = bot.BotMessageLog ;
         }
 
-        private void MainWin_Loaded(object sender, RoutedEventArgs e)
+        void btnMsgSend_Click(object sender, RoutedEventArgs e)
         {
-            TargetSend.Text = "Запустился";
-        }
-
-        private void btnMsgSend_Click(object sender, RoutedEventArgs e)
-        {
-            botClient.SendMsg(txtMsgSend.Text, TargetSend.Text);
+            bot.SendMsg(txtMsgSend.Text, IDtarget.Text);
         }
     }
 }

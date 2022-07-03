@@ -12,6 +12,8 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 
 // using Telegram.Bot.Extensions.Polling;
@@ -24,7 +26,6 @@ namespace WPFapp1TGbot
     class MyFunction
     {
 
-
         /// <summary>
         /// Обрабатывает поступающую инфу
         /// </summary>
@@ -34,7 +35,7 @@ namespace WPFapp1TGbot
         public static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
             Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(update));
-
+            await SaveToJSON(botClient, update);
 
             if (update.Type == UpdateType.Message && update?.Message?.Text != null)
             {
@@ -106,8 +107,10 @@ namespace WPFapp1TGbot
 
             #endregion
 
+            
 
         }
+
 
         /// <summary>
         /// Обрабатывает сообщения
@@ -115,7 +118,7 @@ namespace WPFapp1TGbot
         /// <param name="botClient"></param>
         /// <param name="update"></param>
         /// <param name="message"></param>
-        public static async Task HandleMessage(ITelegramBotClient botClient, Update update, Message message)
+        static async Task HandleMessage(ITelegramBotClient botClient, Update update, Message message)
         {
             // if (message.Text == "/start")
             // {
@@ -189,7 +192,7 @@ namespace WPFapp1TGbot
         /// <param name="path">Название файла</param>
         /// <param name="message">Готово или нет</param>
         /// <param name="thisis">Тип данных</param>
-        public static async Task d(ITelegramBotClient botClient, string fileId, string path, Message message, string thisis)
+        static async Task d(ITelegramBotClient botClient, string fileId, string path, Message message, string thisis)
         {
             var file = await botClient.GetFileAsync(fileId);
             string way;
@@ -227,7 +230,7 @@ namespace WPFapp1TGbot
         /// </summary>
         /// <param name="botClient"></param>
         /// <param name="callbackQuery"></param>
-        public static async Task HandleCallBackQuery(ITelegramBotClient botClient, CallbackQuery callbackQuery)
+        static async Task HandleCallBackQuery(ITelegramBotClient botClient, CallbackQuery callbackQuery)
         {
             #region Работа со списком документов
 
@@ -475,7 +478,7 @@ namespace WPFapp1TGbot
         /// </summary>
         /// <param name="botClient"></param>
         /// <param name="arr"></param>
-        public static async Task RecordNewSale(ITelegramBotClient botClient, string[] arr)
+        static async Task RecordNewSale(ITelegramBotClient botClient, string[] arr)
         {
             string name = arr[1];
             int.TryParse(arr[2], out int priceSale);
@@ -486,6 +489,36 @@ namespace WPFapp1TGbot
                 await sw.WriteLineAsync(DateTime.Now.ToShortDateString() + "\t" + name + "\t" + priceSale + "\t" +
                                   amountSale);
             };
+        }
+
+        /// <summary>
+        /// Сохраняем в JSON ID, имя, сообщения, время
+        /// </summary>
+        /// <param name="botClient"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        static async Task SaveToJSON(ITelegramBotClient botClient, Update update)
+        {
+            JObject UserInfo = new JObject()
+            {
+                ["ID"] = $"{update.Id}\n",
+                ["Name"] = $"{update.Message.Chat.FirstName}\n",
+                ["Date"] = $"{DateTime.Now.ToLongTimeString()}\n",
+                ["Message"] = $"{update.Message.Text}\n",
+            };
+            JObject User = new JObject();
+            JArray MSG = new JArray();
+
+            MSG.Add($"{User}\n");
+            MSG.Add(UserInfo);
+
+            JObject MainTree = new JObject() { ["MSG"] = MSG,};
+
+            string json = JsonConvert.SerializeObject(MainTree);
+
+            await System.IO.File.AppendAllTextAsync(@"JSON\txt.json", json);
+
+
         }
 
         public static Task HandleErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken cancellationToken)

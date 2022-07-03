@@ -7,102 +7,118 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="MainWin" Background="LightGray" Visibility="Visible" ShowGridLines="True" Loaded="MainWin_Loaded">
+    <Grid x:Name="MainWin" 
+          Background="LightGray" 
+          ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="80*"></ColumnDefinition>
+            <ColumnDefinition Width="80*"></ColumnDefinition>
+
+            <ColumnDefinition Width="80*"/>
         </Grid.ColumnDefinitions>
-        <Button Name="List" 
-                Grid.Row="4" 
-                Grid.Column="0"
-                Background="LightBlue"
-                Margin="5">
-            Просмотреть файлы
-        </Button>
-        <Button Name="Save" 
-                Grid.Row="4" 
-                Grid.Column="1"
-                Background="LightBlue"
-                Margin="5">
-            Сохранить файл
-        </Button>
-        <Button Name="AddSale" 
-                Grid.Row="4" 
-                Grid.Column="2"
-                Background="LightBlue"
-                Margin="5">
-            Добавить продажу
-        </Button>
-        <TextBlock x:Name="TargetSend" 
-                   Grid.Row="2" 
-                   Grid.Column="0" Grid.ColumnSpan="2"
-                           Text="{Binding ElementName=logList, Path=SelectedItem.Id}"
-                           Visibility="Visible"
-                           Margin="5"/>
-        <TextBox x:Name="txtMsgSend" 
-                 Grid.Row="3"
-                 Grid.Column="0" Grid.ColumnSpan="2"
-                         FontSize="15" 
-                         Margin="5"
-                         Width="420"
-                         Height="30"
-                         HorizontalAlignment="Left"/>
-        <Button x:Name="btnMsgSend" 
-                Grid.Row="3"
-                Grid.Column="1"
-                        FontSize="15" 
-                        Content="Sent" 
-                        Margin="170,12,0,11" 
-                        HorizontalAlignment="Left"
-                        Width="86" Height="27" Click="btnMsgSend_Click"/>
-        <ListBox Name="logList"
-                   Grid.Row="0" Grid.RowSpan="2"
-                   Grid.Column="0" Grid.ColumnSpan="2"
-                   Margin="5"
-                   Background="White">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Black" Margin="5" BorderThickness="1" CornerRadius="10">
-                        <StackPanel Margin="10">
-                            <TextBlock Text="{Binding FirstName}" Margin="0" FontSize="15"/>
-                            <TextBlock Text="{Binding Msg}" Margin="0" FontSize="20"/>
-                            <TextBlock Text="{Binding Time}" Margin="10 0" FontSize="10" Foreground="Gray" TextAlignment="Right"/>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
+        <Border Margin="25,25,25,25"
+                Background="White"
+                Grid.Row="0" Grid.RowSpan="5"
+                Grid.Column="0" Grid.ColumnSpan="2"
+                CornerRadius="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="15"/>
+            </Border.Effect>
+        </Border>
+        
+        <Border Margin="5"
+                Background="White"
+                Grid.Row="4" Grid.RowSpan="1"
+                Grid.Column="2" Grid.ColumnSpan="1"
+                CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="5" Color="LightGray" ShadowDepth="5"/>
+            </Border.Effect>
+            <TextBox x:Name="txtMsgSend" 
+                 Grid.Row="4"
+                 Grid.Column="2"
+                 FontSize="12" 
+                 Margin="5,5,0,5"
+                 HorizontalAlignment="Left" 
+                 Width="242"
+                 Background="White"
+                 Opacity="0.5"
+                 materialDesign:HintAssist.Hint="Сообщение пользователю"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" Grid.ColumnSpan="2"/>
+        </Border>
+        <Border Grid.Row="0" Grid.RowSpan="3"
+                Grid.Column="2" Grid.ColumnSpan="1"
+                Margin="5"
+                CornerRadius="10"
+                Background="White">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Color="LightGray" ShadowDepth="5"/>
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Background="White"
+                           Text="Сообщения от пользователей"
+                           Margin="5,5,5,0"
+                           TextAlignment="Center"
+                           Style="{StaticResource MaterialDesignTextBlock}" TextWrapping="NoWrap" FontStyle="Normal" FontWeight="Medium"/>
+                <ListBox Name="logList"
+                 Grid.Row="0" Grid.RowSpan="3"
+                 Grid.Column="2" Grid.ColumnSpan="2"
+                 Margin="5"
+                 Background="White"
+                 Opacity="0.5" Height="272">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="LightCyan" BorderBrush="Black" Margin="5" BorderThickness="1" CornerRadius="10" >
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="10"/>
+                            </Border.Effect>
+                            <StackPanel x:Name="stck" Margin="10" Width="250">
+                                <TextBlock Text="{Binding FirstName}" Margin="0" FontSize="10"/>
+                                <TextBlock Text="{Binding Msg}" Margin="0" FontSize="15"/>
+                                <TextBlock Text="{Binding Time}" Margin="10 0" FontSize="5" Foreground="Gray" TextAlignment="Right"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button x:Name="OnOff"
-               Background="Black"
-               Grid.Column="2" 
-               Content="Label" 
-               HorizontalAlignment="Left" 
-               Margin="22,0,0,0" 
-               Grid.Row="3" 
-               VerticalAlignment="Center"
-                />
-        <TextBox x:Name="IDbox"
-                 Grid.Column="2" 
-                 HorizontalAlignment="Center" 
-                 Margin="0,38,0,0" 
-                 TextWrapping="Wrap" 
-                 Text="TextBox"
-                 VerticalAlignment="Top"
-                 Width="223" />
-        <TextBox x:Name="ChatBox"
-                 Grid.Column="2" 
-                 HorizontalAlignment="Center" 
-                 Margin="0,84,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="223" Cursor="Arrow" Height="175" Grid.RowSpan="2"/>
-        <TextBox x:Name="UserName"
-                 Grid.Column="2" HorizontalAlignment="Left" Margin="14,10,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="231"/>
+        </StackPanel>
+        </Border>
+        
+        <Border Grid.Column="2"
+                Grid.Row="3"
+                Margin="5"
+                Background="Wheat"
+                Opacity="0.5"
+                CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Color="LightGray" ShadowDepth="5"/>
+            </Border.Effect>
+            <Grid>
+                <Button x:Name="btnMsgSend"
+                        FontSize="10" 
+                        Content="Sent"
+                        Opacity=""
+                        Margin="180,2,5,2"
+                        Click="btnMsgSend_Click"/>
+                <TextBlock x:Name="IDtarget" 
+                           Grid.Row="3"
+                           Grid.Column="2"
+                           Text="{Binding SelectedItem.ID, ElementName=logList}"
+                           Margin="5,0,100,0"
+                           TextAlignment="Center"
+                           Background="White"
+                           Opacity="0.1"
+                           Padding="5,5,100,5"
+                           Style="{StaticResource MaterialDesignTextBlock}"/>
+            </Grid>
+        </Border>
 
     </Grid>
 </Window>
