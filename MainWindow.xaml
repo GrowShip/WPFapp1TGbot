@@ -11,17 +11,16 @@
           Background="LightGray" 
           ShowGridLines="False">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80*"></ColumnDefinition>
-            <ColumnDefinition Width="80*"></ColumnDefinition>
-
             <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="260"/>
         </Grid.ColumnDefinitions>
         <Border Margin="25,25,25,25"
                 Background="White"
@@ -49,7 +48,6 @@
                  HorizontalAlignment="Left" 
                  Width="242"
                  Background="White"
-                 Opacity="0.5"
                  materialDesign:HintAssist.Hint="Сообщение пользователю"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Grid.ColumnSpan="2"/>
         </Border>
@@ -72,17 +70,17 @@
                  Grid.Column="2" Grid.ColumnSpan="2"
                  Margin="5"
                  Background="White"
-                 Opacity="0.5" Height="272">
+                 Height="272">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="LightCyan" BorderBrush="Black" Margin="5" BorderThickness="1" CornerRadius="10" >
+                        <Border Background="LightCyan" BorderBrush="Black" Margin="2" BorderThickness="1" CornerRadius="10" >
                             <Border.Effect>
-                                <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="10"/>
+                                <DropShadowEffect BlurRadius="15" Color="LightGray" ShadowDepth="5"/>
                             </Border.Effect>
-                            <StackPanel x:Name="stck" Margin="10" Width="250">
-                                <TextBlock Text="{Binding FirstName}" Margin="0" FontSize="10"/>
+                            <StackPanel x:Name="stck"  Width="250">
+                                <TextBlock Text="{Binding FirstName}" Margin="0" FontSize="10" FontWeight="Medium"/>
                                 <TextBlock Text="{Binding Msg}" Margin="0" FontSize="15"/>
-                                <TextBlock Text="{Binding Time}" Margin="10 0" FontSize="5" Foreground="Gray" TextAlignment="Right"/>
+                                <TextBlock Text="{Binding Time}" Margin="0"  FontSize="7" TextAlignment="Center"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
@@ -104,17 +102,14 @@
                 <Button x:Name="btnMsgSend"
                         FontSize="10" 
                         Content="Sent"
-                        Opacity=""
                         Margin="180,2,5,2"
                         Click="btnMsgSend_Click"/>
                 <TextBlock x:Name="IDtarget" 
                            Grid.Row="3"
                            Grid.Column="2"
                            Text="{Binding SelectedItem.ID, ElementName=logList}"
-                           Margin="5,0,100,0"
+                           Margin="10,0,100,0"
                            TextAlignment="Center"
-                           Background="White"
-                           Opacity="0.1"
                            Padding="5,5,100,5"
                            Style="{StaticResource MaterialDesignTextBlock}"/>
             </Grid>
