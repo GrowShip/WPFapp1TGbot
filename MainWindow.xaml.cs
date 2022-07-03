@@ -27,36 +27,24 @@ namespace WPFapp1TGbot
     /// </summary>
     public partial class MainWindow : Window
     {
+        TGmsgClient botClient;
         public MainWindow()
         {
             InitializeComponent();
+
+            botClient = new TGmsgClient(this);
+
+            logList.ItemsSource = ;
         }
-        static async Task Main(string[] args)
+
+        private void MainWin_Loaded(object sender, RoutedEventArgs e)
         {
-            string path = "/Users/ilya/Desktop/token.txt";
-            var botClient = new TelegramBotClient(System.IO.File.ReadAllText(path));
+            TargetSend.Text = "Запустился";
+        }
 
-            using var cts = new CancellationTokenSource();
-
-            // Bot = new TelegramBotClient(token);
-            // using var cts = new CancellationTokenSource();
-
-            var receiverOptions = new ReceiverOptions
-            {
-                AllowedUpdates = { }
-            };
-
-            botClient.StartReceiving(MyFunction.HandleUpdateAsync,
-                MyFunction.HandleErrorAsync,
-                receiverOptions,
-                cts.Token);
-
-            var me = await botClient.GetMeAsync();
-
-            Console.WriteLine($"Бот @{me.Username} запущен и ждет сообщений...");
-            Console.ReadLine();
-
-            cts.Cancel();
+        private void btnMsgSend_Click(object sender, RoutedEventArgs e)
+        {
+            botClient.SendMsg(txtMsgSend.Text, TargetSend.Text);
         }
     }
 }

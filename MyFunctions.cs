@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using Telegram.Bot.Exceptions;
+using System.Collections.ObjectModel;
 
 // using Telegram.Bot.Extensions.Polling;
 // using Telegram.Bot.Examples.Polling;
@@ -19,8 +21,10 @@ using Telegram.Bot.Exceptions;
 
 namespace WPFapp1TGbot
 {
-    public class MyFunction
+    class MyFunction
     {
+
+
         /// <summary>
         /// Обрабатывает поступающую инфу
         /// </summary>
@@ -31,13 +35,14 @@ namespace WPFapp1TGbot
         {
             Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(update));
 
+
             if (update.Type == UpdateType.Message && update?.Message?.Text != null)
             {
                 await HandleMessage(botClient, update, update.Message);
                 return;
             }
 
-            if (update.Type == UpdateType.CallbackQuery)
+            else if (update.Type == UpdateType.CallbackQuery)
             {
                 await HandleCallBackQuery(botClient, update.CallbackQuery);
                 return;
@@ -45,7 +50,7 @@ namespace WPFapp1TGbot
 
             #region MyRegion Определения переданных файлов
 
-            if (update.Message != null && update.Message.Type == Telegram.Bot.Types.Enums.MessageType.Document)
+            else if (update.Message != null && update.Message.Type == Telegram.Bot.Types.Enums.MessageType.Document)
             {
                 Console.WriteLine($"{update.Message.Document.FileId}\n" +
                                   $"{update.Message.Document.FileName}\n" +
@@ -58,7 +63,7 @@ namespace WPFapp1TGbot
                     whatIsThis);
                 return;
             }
-            if (update.Message != null && update.Message.Type == Telegram.Bot.Types.Enums.MessageType.Audio)
+            else if (update.Message != null && update.Message.Type == Telegram.Bot.Types.Enums.MessageType.Audio)
             {
                 Console.WriteLine($"{update.Message.Audio.FileId}\n" +
                                   $"{update.Message.Audio.FileName}\n" +
@@ -71,7 +76,7 @@ namespace WPFapp1TGbot
                     whatIsThis);
                 return;
             }
-            if (update.Message != null && update.Message.Type == Telegram.Bot.Types.Enums.MessageType.Voice)
+            else if (update.Message != null && update.Message.Type == Telegram.Bot.Types.Enums.MessageType.Voice)
             {
                 Console.WriteLine($"{update.Message.Voice.FileId}\n" +
                                   $"{update.Message.Voice.MimeType}\n" +
@@ -86,7 +91,7 @@ namespace WPFapp1TGbot
                     whatIsThis);
                 return;
             }
-            if (update.Message != null && update.Message.Type == MessageType.Photo)
+            else if (update.Message != null && update.Message.Type == MessageType.Photo)
             {
                 Console.WriteLine($"{update.Message.Photo.Last().FileId}\n" +
                                   $"{update.Message.Photo.Last().FileUniqueId}");
@@ -100,6 +105,7 @@ namespace WPFapp1TGbot
             }
 
             #endregion
+
 
         }
 
@@ -132,13 +138,13 @@ namespace WPFapp1TGbot
                 return;
             }
 
-            if (message.Text.Contains("Сохранить"))
+            else if (message.Text.Contains("Сохранить"))
             {
                 await botClient.SendTextMessageAsync(message.Chat.Id, $"Отправь мне что ты хочешь, я жду");
                 return;
             }
 
-            if (message.Text == "Список файлов")
+            else if (message.Text == "Список файлов")
             {
                 InlineKeyboardMarkup keyboard0 = new(new[]
                 {
@@ -157,7 +163,7 @@ namespace WPFapp1TGbot
                 return;
             }
 
-            if (message.Text == "Добавить продажу")
+            else if (message.Text == "Добавить продажу")
             {
                 InlineKeyboardMarkup keyboard1 = new(new[]
                 {

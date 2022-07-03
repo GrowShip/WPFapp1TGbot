@@ -7,13 +7,13 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="MainWin" Background="LightGray" Visibility="Visible">
+    <Grid x:Name="MainWin" Background="LightGray" Visibility="Visible" ShowGridLines="True" Loaded="MainWin_Loaded">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -41,27 +41,68 @@
                 Margin="5">
             Добавить продажу
         </Button>
-        <Button Name="SendMsg"
-                Grid.Column="1"
-                Grid.Row="3"
-                Margin="200,5,5,5"
-                Background="Black"/>
-        <TextBlock Name="MessageBox"
-                   Grid.Row="3"
+        <TextBlock x:Name="TargetSend" 
+                   Grid.Row="2" 
                    Grid.Column="0" Grid.ColumnSpan="2"
-                   Background="White" 
-                   Margin="5,5,80,5"
-                   FontSize="15"/>
-        <TextBlock Name="MediaInfo"
-                   Grid.Row="0" Grid.RowSpan="4"
-                   Grid.Column="2"
-                   Margin="5"
-                   Background="LightSkyBlue"/>
-        <TextBlock Name="ChatInfo"
+                           Text="{Binding ElementName=logList, Path=SelectedItem.Id}"
+                           Visibility="Visible"
+                           Margin="5"/>
+        <TextBox x:Name="txtMsgSend" 
+                 Grid.Row="3"
+                 Grid.Column="0" Grid.ColumnSpan="2"
+                         FontSize="15" 
+                         Margin="5"
+                         Width="420"
+                         Height="30"
+                         HorizontalAlignment="Left"/>
+        <Button x:Name="btnMsgSend" 
+                Grid.Row="3"
+                Grid.Column="1"
+                        FontSize="15" 
+                        Content="Sent" 
+                        Margin="170,12,0,11" 
+                        HorizontalAlignment="Left"
+                        Width="86" Height="27" Click="btnMsgSend_Click"/>
+        <ListBox Name="logList"
                    Grid.Row="0" Grid.RowSpan="2"
                    Grid.Column="0" Grid.ColumnSpan="2"
                    Margin="5"
-                   Background="LightSkyBlue"/>
-        
+                   Background="White">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" Margin="5" BorderThickness="1" CornerRadius="10">
+                        <StackPanel Margin="10">
+                            <TextBlock Text="{Binding FirstName}" Margin="0" FontSize="15"/>
+                            <TextBlock Text="{Binding Msg}" Margin="0" FontSize="20"/>
+                            <TextBlock Text="{Binding Time}" Margin="10 0" FontSize="10" Foreground="Gray" TextAlignment="Right"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="OnOff"
+               Background="Black"
+               Grid.Column="2" 
+               Content="Label" 
+               HorizontalAlignment="Left" 
+               Margin="22,0,0,0" 
+               Grid.Row="3" 
+               VerticalAlignment="Center"
+                />
+        <TextBox x:Name="IDbox"
+                 Grid.Column="2" 
+                 HorizontalAlignment="Center" 
+                 Margin="0,38,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="TextBox"
+                 VerticalAlignment="Top"
+                 Width="223" />
+        <TextBox x:Name="ChatBox"
+                 Grid.Column="2" 
+                 HorizontalAlignment="Center" 
+                 Margin="0,84,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="223" Cursor="Arrow" Height="175" Grid.RowSpan="2"/>
+        <TextBox x:Name="UserName"
+                 Grid.Column="2" HorizontalAlignment="Left" Margin="14,10,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="231"/>
+
     </Grid>
 </Window>
